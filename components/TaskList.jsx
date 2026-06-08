@@ -5,12 +5,16 @@ import DeleteTask from "./DeleteTask";
 
 const getTasks = async () => {
     try {
-        const res = await fetch("/api/tasks", {
-            cache: "no-store",
-            next: { revalidate: 0 },
-        });
+        // const res = await fetch("/api/tasks", {
+        //     cache: "no-store",
+        //     next: { revalidate: 0 },
+        // });
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
+    cache: "no-store",
+});
         if (!res.ok) {
             throw new Error("Failed to fetch tasks");
+
         }
         return res.json();
     } catch (error) {

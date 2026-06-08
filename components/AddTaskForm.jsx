@@ -19,7 +19,7 @@ const AddTaskForm = () => {
         }
 
         try {
-            const res = await fetch('api/tasks', {
+            const res = await fetch('/api/tasks', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
