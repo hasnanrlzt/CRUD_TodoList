@@ -7,6 +7,7 @@ const getTasks = async () => {
     try {
         const res = await fetch("/api/tasks", {
             cache: "no-store",
+            next: { revalidate: 0 },
         });
         if (!res.ok) {
             throw new Error("Failed to fetch tasks");
