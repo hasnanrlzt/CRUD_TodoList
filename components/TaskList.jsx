@@ -3,20 +3,36 @@ import StatusTask from "./StatusTask";
 import DeleteTask from "./DeleteTask";
 
 
+// const getTasks = async () => {
+//     try {
+//         const res = await fetch("/api/tasks", {
+//             cache: "no-store",
+//             next: { revalidate: 0 },
+//         });
+        
+//         if (!res.ok) {
+//             throw new Error("Failed to fetch tasks");
+
+//         }
+//         return res.json();
+//     } catch (error) {
+//         console.log(error);
+//         return { data: [] };
+//     }
+// };
+
 const getTasks = async () => {
     try {
-        // const res = await fetch("/api/tasks", {
-        //     cache: "no-store",
-        //     next: { revalidate: 0 },
-        // });
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
-    cache: "no-store",
-});
+        const res = await fetch(
+            new URL("/api/tasks", process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
+            { cache: "no-store" }
+        );
+
         if (!res.ok) {
             throw new Error("Failed to fetch tasks");
-
         }
-        return res.json();
+
+        return await res.json();
     } catch (error) {
         console.log(error);
         return { data: [] };
