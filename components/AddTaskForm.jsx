@@ -13,25 +13,27 @@ const AddTaskForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!judul || !deskripsi) {
-           return toast.error("Judul dan Deskripsi harus diisi!");
+            return toast.error("Judul dan Deskripsi harus diisi!");
         }
 
         try {
-            const res = await fetch("http://localhost:3000/api/tasks", {
+            const res = await fetch("/api/tasks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ judul, deskripsi, status }),
             });
-             
+
             if (res.ok) {
                 router.push("/");
                 toast.success("Task berhasil ditambahkan!");
             }
-            } catch (error) {
-                console.log(error);
+
+        } catch (error) {
+            console.log(error);
         }
     };
     return (
@@ -41,19 +43,19 @@ const AddTaskForm = () => {
                     <div className="flex flex-col gap-2">
                         <label htmlFor="judul" className="font-semibold text-slate-200">Judul Task</label>
                         <input type="text" name="judul" id="judul" placeholder="Masukkan Judul Task ..."
-                            autoComplete="off" className="p-2 bg-slate-700 rounded text-slate-200" 
-                            onChange={(e) => setJudul (e.target.value)} value={judul}/>
+                            autoComplete="off" className="p-2 bg-slate-700 rounded text-slate-200"
+                            onChange={(e) => setJudul(e.target.value)} value={judul} />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="deskripsi" className="font-semibold text-slate-200">Deskripsi Task</label>
                         <input type="text" name="deskripsi" id="deskripsi" placeholder="Masukkan Deskripsi Task ..."
-                            autoComplete="off" className="p-2 bg-slate-700 rounded text-slate-200" 
-                            onChange={(e) => setDeskripsi (e.target.value)} value={deskripsi}/>
+                            autoComplete="off" className="p-2 bg-slate-700 rounded text-slate-200"
+                            onChange={(e) => setDeskripsi(e.target.value)} value={deskripsi} />
                     </div>
                     <div className="flex gap-4 items-center justify-start">
                         <label htmlFor="status" className="font-semibold text-slate-200">Status Task</label>
                         <select name="status" id="status" className="p-2 bg-slate-700 rounded text-slate-200"
-                            onChange={(e) => setStatus (e.target.value)} value={status}>
+                            onChange={(e) => setStatus(e.target.value)} value={status}>
                             <option value="Belum Mulai">Belum Mulai</option>
                             <option value="Sedang Dikerjakan">Sedang Dikerjakan</option>
                             <option value="Selesai">Selesai</option>

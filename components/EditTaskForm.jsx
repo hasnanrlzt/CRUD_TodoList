@@ -13,7 +13,7 @@
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+            const res = await fetch(`/api/tasks/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

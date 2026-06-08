@@ -7,7 +7,7 @@ const DeleteTask = ({ id }) => {
   const router = useRouter();
   const deleteTask = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+      const res = await fetch(`/api/tasks/${id}`, {
         method: "DELETE",
       });
         if (res.ok) {
