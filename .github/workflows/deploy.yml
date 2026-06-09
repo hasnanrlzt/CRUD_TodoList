@@ -28,7 +28,7 @@ jobs:
             ssh -vT git@github.com || true
 
             echo "===== GIT SSH COMMAND ====="
-            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
+            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_ed25519 -o StrictHostKeyChecking=no"
 
             echo "$GIT_SSH_COMMAND"
 
