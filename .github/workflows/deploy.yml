@@ -37,3 +37,10 @@ jobs:
             git remote -v
 
             git pull origin main || true
+
+            npm run build
+
+            pm2 restart next-todolist
+
+            pm2 save
+
