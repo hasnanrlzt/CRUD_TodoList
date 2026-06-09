@@ -19,12 +19,6 @@ jobs:
           script: |
             cd ~/hasna/next_todolist
 
-            eval "$(ssh-agent -s)”
-
-            ssh-add -D
-
-            ssh-add ~/.ssh/hasna/id_rsa
-
             git pull origin main
 
             npm install
