@@ -18,16 +18,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             set -e
-            # Force Git to use your custom identity key cleanly
-            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
+            # Point to the updated ed25519 key path
+            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_ed25519 -o StrictHostKeyChecking=no"
             
-            # Use absolute path instead of tilde (~)
             cd /home/ubuntu/hasna/next_todolist
-            
-            # Pull code
             git pull origin main
             
-            # Build and deploy
             npm install
             npm run build
             pm2 restart next-todolist
