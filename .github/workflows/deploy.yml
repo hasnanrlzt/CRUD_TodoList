@@ -15,15 +15,17 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }} # Make sure this matches Step 1!
           script: |
             set -e
-            # Point to the updated ed25519 key path
-            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_ed25519 -o StrictHostKeyChecking=no"
             
+            # Navigate to project
             cd /home/ubuntu/hasna/next_todolist
+            
+            # This will now pull instantly via token without requiring any SSH keys
             git pull origin main
             
+            # Build and launch
             npm install
             npm run build
             pm2 restart next-todolist
