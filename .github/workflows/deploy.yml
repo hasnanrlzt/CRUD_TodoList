@@ -17,23 +17,18 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            whoami
-
-            echo "HOME=$HOME"
-
-            ls -la ~/.ssh || true
-            ls -la ~/.ssh/hasna || true
-
-            echo "===== SSH TEST ====="
-            ssh -vT git@github.com || true
-
-            echo "===== GIT SSH COMMAND ====="
+            set -e
+            # Force Git to use your custom identity key cleanly
             export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
-
-            echo "$GIT_SSH_COMMAND"
-
-            cd ~/hasna/next_todolist
-
-            git remote -v
-
-            git pull origin main || true
+            
+            # Use absolute path instead of tilde (~)
+            cd /home/ubuntu/hasna/next_todolist
+            
+            # Pull code
+            git pull origin main
+            
+            # Build and deploy
+            npm install
+            npm run build
+            pm2 restart next-todolist
+            pm2 save
