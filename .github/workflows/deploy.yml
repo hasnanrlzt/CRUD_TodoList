@@ -17,6 +17,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            set -e
+            
+            export GIT_SSH_COMMAND="ssh -i ~/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
+            
             cd ~/hasna/next_todolist
 
             git pull origin main
