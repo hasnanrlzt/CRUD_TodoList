@@ -17,16 +17,23 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -e
+            whoami
 
+            echo "HOME=$HOME"
+
+            ls -la ~/.ssh || true
+            ls -la ~/.ssh/hasna || true
+
+            echo "===== SSH TEST ====="
+            ssh -vT git@github.com || true
+
+            echo "===== GIT SSH COMMAND ====="
             export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
+
+            echo "$GIT_SSH_COMMAND"
 
             cd ~/hasna/next_todolist
 
-            git pull origin main
+            git remote -v
 
-            npm install
-            npm run build
-
-            pm2 restart next-todolist
-            pm2 save
+            git pull origin main || true
