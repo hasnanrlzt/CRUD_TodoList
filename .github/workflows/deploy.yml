@@ -18,17 +18,15 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             set -e
-            
-            export GIT_SSH_COMMAND="ssh -i ~/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
-            
+
+            export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/hasna/id_rsa -o StrictHostKeyChecking=no"
+
             cd ~/hasna/next_todolist
 
             git pull origin main
 
             npm install
-
             npm run build
 
-            pm2 restart next-todolist || pm2 start npm --name next-todolist -- start
-
+            pm2 restart next-todolist
             pm2 save
